@@ -90,7 +90,7 @@ const Side = styled.div`
   flex: 1;
 `;
 
-const NavLink = styled.a`
+export const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
