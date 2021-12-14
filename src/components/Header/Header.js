@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { COLORS, QUERIES, WEIGHTS } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 import Icon from '../Icon';
+import UnstyledButton from '../UnstyledButton';
+import VisuallyHidden from '../VisuallyHidden';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -22,23 +24,29 @@ const Header = () => {
         <Side>
           <Logo />
         </Side>
-        <Nav>
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Side>
-          <MobileNav>
+        </DesktopNav>
+        <MobileActions>
+          <UnstyledButton>
             <Icon id="shopping-bag" size={20} />
+            <VisuallyHidden>Open Cart</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton>
             <Icon id="search" size={20} />
-            <HamburgerButton onClick={() => setShowMobileMenu(true)}>
-              <Icon id="menu" size={20} />
-            </HamburgerButton>
-          </MobileNav>
-        </Side>
+            <VisuallyHidden>Search</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+            <Icon id="menu" size={20} />
+            <VisuallyHidden>Menu</VisuallyHidden>
+          </UnstyledButton>
+        </MobileActions>
+        <Side></Side>
       </MainHeader>
 
       <MobileMenu
@@ -55,27 +63,22 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  border-top: 4px solid ${COLORS.gray[900]};
 `;
 
-const HamburgerButton = styled.button`
-  border: none;
-  background: transparent;
-  cursor: pointer;
-`;
-
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
-  @media ${({ theme }) => theme.tabletMax} {
+  @media ${QUERIES.tabletMax} {
     display: none;
   }
 `;
 
-const MobileNav = styled.nav`
+const MobileActions = styled.div`
   display: none;
 
-  @media ${({ theme }) => theme.tabletMax} {
+  @media ${QUERIES.tabletMax} {
     display: flex;
     justify-content: flex-end;
 
